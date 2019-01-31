@@ -15,8 +15,8 @@ upgrade
 ./browsers.sh
 ./compression_tools.sh
 ./git.sh
-./image_tools.sh
-./misc.sh
+# ./image_tools.sh
+# ./misc.sh
 ./misc_tools.sh
 ./../npm.sh
 ./tmux.sh
