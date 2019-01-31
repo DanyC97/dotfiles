@@ -80,7 +80,7 @@ set_github_ssh_key() {
     copy_public_ssh_key_to_clipboard "${sshKeyFileName}.pub"
     # open_github_ssh_page
     # test_ssh_connection \
-        && rm "${sshKeyFileName}.pub"
+        # && rm "${sshKeyFileName}.pub"
 
 }
 

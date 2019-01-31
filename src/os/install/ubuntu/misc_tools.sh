@@ -11,6 +11,8 @@ print_in_purple "\n   Miscellaneous Tools\n\n"
 install_package "cURL" "curl"
 install_package "ShellCheck" "shellcheck"
 install_package "xclip" "xclip"
+install_package "jq" "jq"
+install_package "asciicinema" "asciicinema"
 
 if [ -d "$HOME/.nvm" ]; then
 
@@ -29,3 +31,20 @@ if [ -d "$HOME/.nvm" ]; then
 
     install_package "Yarn" "yarn" "--no-install-recommends"
 fi
+
+if ! package_is_installed "code"; then
+
+    add_key "https://packages.microsoft.com/keys/microsoft.asc" \
+        || print_error "VSCode (add key)"
+
+    add_to_source_list "https://packages.microsoft.com/repos/vscode stable main" "vscode.list" \
+        || print_error "VSCode (add to package resource list)"
+
+    update &> /dev/null \
+        || print_error "VSCode (resync package index files)"
+
+    install_package "Visual Studio Code" "code"
+
+fi
+
+

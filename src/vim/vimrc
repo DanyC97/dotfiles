@@ -114,6 +114,7 @@ set wildmenu                   " Enable enhanced command-line
                                " match highlighted).
 
 set winminheight=0             " Allow windows to be squashed.
+set autoread                   " Set to auto read when a file is changed from the outside
 
 
 " ----------------------------------------------------------------------
@@ -135,14 +136,15 @@ function! InitPlugins() abort
     call minpac#add('chrisbra/unicode.vim')
     call minpac#add('editorconfig/editorconfig-vim')
     call minpac#add('godlygeek/tabular')
-    call minpac#add('isRuslan/vim-es6')
-    call minpac#add('jelera/vim-javascript-syntax')
-    call minpac#add('kien/ctrlp.vim')
+
+    call minpac#add('junegunn/fzf.vim')
     call minpac#add('marijnh/tern_for_vim', { 'do': ':silent ! cd $HOME/.vim/pack/minpac/start/tern_for_vim && npm i &> /dev/null' })
     call minpac#add('mattn/emmet-vim')
-    call minpac#add('mattn/webapi-vim')
     call minpac#add('mhinz/vim-signify')
-    call minpac#add('moll/vim-node')
+    call minpac#add('w0rp/ale')
+    call minpac#add('airblade/vim-gitgutter')
+    call minpac#add('itchyny/lightline.vim')
+    call minpac#add('terryma/vim-multiple-cursors')
     call minpac#add('mtscout6/syntastic-local-eslint.vim')
     call minpac#add('nathanaelkane/vim-indent-guides')
     call minpac#add('raimondi/delimitmate')
@@ -350,13 +352,26 @@ endfunction
 function! ToggleRelativeLineNumbers()
 
     if ( &relativenumber == 1 )
-        set number
+        set norelativenumber
     else
         set relativenumber
     endif
 
 endfunction
 
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function! ToggleAllLineNumbers()
+
+    if ( &relativenumber == 1 && &number ==1 )
+        set norelativenumber
+        set nonumber
+    else
+        set relativenumber
+        set number
+    endif
+
+endfunction
 
 " ----------------------------------------------------------------------
 " | Automatic Commands                                                 |
@@ -483,6 +498,13 @@ nmap <leader>* :%s/\<<C-r><C-w>\>//<Left>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+
+map <space> /
+map <c-space> ?
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 " [,cc] Toggle code comments.
 " https://github.com/tomtom/tcomment_vim
 
@@ -518,6 +540,12 @@ nmap <leader>l :set list!<CR>
 " [,n ] Toggle `set relativenumber`.
 
 nmap <leader>n :call ToggleRelativeLineNumbers()<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,nnr ] Toggle `set relativenumber` and `set number`.
+
+nmap <leader>nnr :call ToggleAllLineNumbers()<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -578,6 +606,30 @@ nmap <leader>v :vsp $MYVIMRC<CR>
 " [,W ] Sudo write.
 
 map <leader>W :w !sudo tee %<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,w ] Fast saving.
+
+nmap <leader>w :w!<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,tn | ,to | ,tc | ,tm | ,t,] Useful mappings for managing tabs.
+
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [ctrl-{jkhl} ] Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 
 " ----------------------------------------------------------------------
