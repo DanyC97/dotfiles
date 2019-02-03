@@ -12,7 +12,7 @@ install_package "cURL" "curl"
 install_package "ShellCheck" "shellcheck"
 install_package "xclip" "xclip"
 install_package "jq" "jq"
-install_package "asciicinema" "asciicinema"
+install_package "asciinema" "asciinema"
 
 if [ -d "$HOME/.nvm" ]; then
 
