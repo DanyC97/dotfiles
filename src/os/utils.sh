@@ -158,6 +158,10 @@ is_git_repository() {
     git rev-parse &> /dev/null
 }
 
+get_git_repository() {
+    git clone "$1" "${2:-}" &> /dev/null
+}
+
 is_supported_version() {
 
     declare -a v1=(${1//./ })
