@@ -13,6 +13,7 @@ install_package "ShellCheck" "shellcheck"
 install_package "xclip" "xclip"
 install_package "jq" "jq"
 install_package "asciinema" "asciinema"
+install_package "tree" "tree"
 
 if [ -d "$HOME/.nvm" ]; then
 

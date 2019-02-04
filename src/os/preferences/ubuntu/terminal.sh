@@ -7,6 +7,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 print_in_purple "\n   Terminal\n\n"
 
+execute "sudo timedatectl set-timezone Europe/London" \
+    "Set timezone to Europe/London"
+
 execute "gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 12'" \
     "Change font size"
 
