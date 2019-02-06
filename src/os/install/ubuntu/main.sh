@@ -21,5 +21,7 @@ upgrade
 ./../npm.sh
 ./tmux.sh
 ./../vim.sh
+./vscode.sh
+./golang.sh
 
 ./cleanup.sh
